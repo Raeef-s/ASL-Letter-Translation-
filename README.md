@@ -26,10 +26,28 @@ Each inference generated 21 landmarks, of which contained 5 different attributes
 More information about the Hand Landmark Detection can be found here: https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker
 
 Each feature was then appended to seperate lists within a larger list (referred to as dataColumns in DataToCSV), with each individual list acting as a column for each data type. 
-The classification of the image was also added as a separate column, bringing the total number of columns to 105. This process was repeated, until every training image had been added.
+The classification of the image was also added as a separate column, bringing the total number of columns to 106. This process was repeated, until every training image had been added.
 
 The list was then converted into a Pandas DataFrame, to save as "MediapipePredictions.csv". No preprocessing was done to the DataFrame to remove empty columns, as to preserve the original length. 
 
-## Training
-To train the model, 
+## Training and Testing
+
+The dataset was split 80-10-10 into training, test, and cross validation sets. 
+
+To train the model, all empty rows of predictions were dropped. This resulted in an uneven distribution of training examples, which was accounted for by calculating the weights of each class. All 105 value columns were passed in as an input vector into the model. 
+
+The model architecture consisted of three layers, including two inital 128 neuron dense layers with a ReLU activation and a final softmax activation for each classification. In addition, the first two dense layers used batch normalization and 40% dropout.
+
+### Accuracy
+
+The model was trained for 100 epochs, with a consistent batch size of 30. The model does not appear to completely converge, but shows minimal return for additional computing. 
+
+#### Epoch 100 Training Accuracy: 0.9177
+#### Epoch 100 Training Loss: 0.2826
+#### Epoch 100 Validation Accuracy: 0.9549
+#### Epoch 100 Validation Loss: 0.1302
+#### Test Accuracy: 0.9539
+#### Test Loss: 0.1372
+
+
 
