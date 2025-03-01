@@ -2,7 +2,7 @@
 ## Overview
 This project is designed to detect American Sign Language (ASL) letters from a webcam. It uses a Feedforward Neural Network, recieving input from Mediapipe Hand Landmark detection.  
 
-## Features
+# Features
 - Classifies 28 different hand symbols, including letter A-Z along with Space, and Delete
 - Model architecture trained with Keras in Tensorflow
 - Displays current predictions in pop up window of frame using OpenCV
