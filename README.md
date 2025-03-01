@@ -1,6 +1,6 @@
 # ASL Webcam Letter Translation Project
 ## Overview
-This project is designed to detect American Sign Language (ASL) letters from a webcam. It uses a Feedforward Neural Network, recieving input from Mediapipe Hand Landmark detection.  
+This project is designed to detect American Sign Language (ASL) letters from a webcam. It uses a Feedforward Neural Network, receiving input from Mediapipe Hand Landmark detection.  
 
 # Features
 - Classifies 28 different hand symbols, including letter A-Z along with Space, and Delete
@@ -25,18 +25,18 @@ Each inference generated 21 landmarks, of which contained 5 different attributes
 
 More information about the Hand Landmark Detection can be found here: https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker
 
-Each feature was then appended to seperate lists within a larger list (referred to as dataColumns in DataToCSV), with each individual list acting as a column for each data type. 
+Each feature was then appended to separate lists within a larger list (referred to as dataColumns in DataToCSV), with each individual list acting as a column for each data type. 
 The classification of the image was also added as a separate column, bringing the total number of columns to 106. This process was repeated, until every training image had been added.
 
 The list was then converted into a Pandas DataFrame, to save as "MediapipePredictions.csv". No preprocessing was done to the DataFrame to remove empty columns, as to preserve the original length. 
 
 ## Training and Testing
 
-The dataset was split 80-10-10 into training, test, and cross validation sets. 
+The dataset was split 80-10-10 into one training, cross validation, and test set. Stratified KFold may be used for future iterations, but was not used in this project. 
 
 To train the model, all empty rows of predictions were dropped. This resulted in an uneven distribution of training examples, which was accounted for by calculating the weights of each class. All 105 value columns were passed in as an input vector into the model. 
 
-The model architecture consisted of three layers, including two inital 128 neuron dense layers with a ReLU activation and a final softmax activation for each classification. In addition, the first two dense layers used batch normalization and 40% dropout.
+The model architecture consisted of three layers, including two initial 128 neuron dense layers with a ReLU activation and a final softmax activation for each classification. In addition, the first two dense layers used batch normalization and 40% dropout.
 
 ### Accuracy
 
